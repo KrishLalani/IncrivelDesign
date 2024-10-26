@@ -6,6 +6,9 @@
     <title>INCRIVEL DESIGN STUDIO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -148,6 +151,11 @@
                 0%, 100% { transform: scale(1); }
                 50% { transform: scale(1.05); }
             }
+            @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
             .animate-fadeIn {
                 animation: fadeIn 1s ease-out;
             }
@@ -175,6 +183,9 @@
             .text-custom {
                 color: rgb(201, 191, 178);
             }
+            .navbar-brand {
+            animation: none !important;
+        }
     
 /* Mobile menu styles */
 @media (max-width: 768px) {
@@ -203,33 +214,134 @@
                     margin-bottom: 0.5rem;
                 }
             }
+
+
+            .gradient-bg {
+            background: linear-gradient(-45deg, #1a202c, #2d3748, #4a5568, #2d3748);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        #hero-section {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            transform: translateZ(-1px) scale(2);
+            z-index: -1;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        .custom-font {
+    font-family: 'BankGothic Md BT', sans-serif;
+}
+
+@font-face {
+            font-family: 'BankGothic Md BT';
+            src: url('path/to/BankGothicMdBT.woff2') format('woff2'),
+                 url('path/to/BankGothicMdBT.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        .text-6xl {
+            font-size: 4rem; /* Example size */
+        }
+        .custom-font {
+    font-family: 'BankGothic Md BT', sans-serif;
+    color: white; /* or any specific color you prefer */
+}
+
+
         </style>
 </head>
-<body class="bg-gray-900 text-white">
-    <header class="bg-gray-800 p-4 fixed w-full z-20">
+<body class="bg-gray-900 text-white mx-auto flex flex-col justify-between items-center">
+    <header class="bg-[rgba(201,191,178,0.9)] px-4 py-2 fixed w-[90%] rounded-lg z-20 shadow-lg mt-8 mx-auto">
         <nav class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
-                <img src="./id_logo.png" alt="Incrivel Design Studio Logo" class="h-10 mr-2">
-                <h1 class="text-2xl font-bold text-custom animate-pulse">
-                    <span style="font-family: 'Tahoma';">INCRIVEL</span> 
-                    <span style="font-family: 'Calibri', sans-serif;">Design Studio</span>
+                <img src="id_logo_black.png" alt="Incrivel Design Studio Logo" class="h-20 mr-2">
+                <h1 class="text-2xl font-bold navbar-brand" style="color: black;">
+                    <p style="font-family: 'Tahoma'; font-size: 1.5em;">incrivel</p> 
+                    <p style="font-family: 'Calibri', sans-serif; font-size: 0.75em; margin-left: 74px; display: inline-block;">DESIGN STUDIO</p>
                 </h1>
-            </div>  
-            <div class="md:hidden">
-                <button id="menu-toggle" class="text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
             </div>
-            <ul id="menu" class="md:flex md:space-x-4 md:relative md:w-auto md:bg-transparent">
-                <li><a href="#home" class="block py-2 px-4 hover:text-custom transition">Home</a></li>
-                <li><a href="#services" class="block py-2 px-4 hover:text-custom transition">Services</a></li>
-                <li><a href="#projects" class="block py-2 px-4 hover:text-custom transition">Projects</a></li>
-                <li><a href="#contact" class="block py-2 px-4 hover:text-custom transition">Contact</a></li>
+            
+            <ul class="hidden md:flex md:space-x-8">
+                <li><a href="#home" class="nav-link text-black font-semibold px-4 py-2">Home</a></li>
+                <li><a href="#services" class="nav-link text-black font-semibold px-4 py-2">Services</a></li>
+                <li><a href="#projects" class="nav-link text-black font-semibold px-4 py-2">Projects</a></li>
+                <li><a href="#contact" class="nav-link text-black font-semibold px-4 py-2">Contact</a></li>
             </ul>
+            <button class="md:hidden text-black">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                </svg>
+            </button>
         </nav>
     </header>
+    
+    
     
     <!-- Overlay for mobile menu -->
     <div id="menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 hidden"></div>
@@ -237,70 +349,98 @@
     
 
     <main>
-        <section id="home" class="min-h-screen flex items-center justify-center bg-cover bg-center relative" style="background-image: url('path/to/your/interior-background.jpg');">
-            <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        <section id="home" class="w-screen min-h-screen flex items-center justify-center relative">
+            <div class="absolute inset-0 bg-black bg-opacity-80"></div>
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('landing_back.png'); opacity: 0.5;"></div>
             <div class="text-center z-10 relative animate-fadeInUp">
                 <br class="mobile-break">
                 <br class="mobile-break">
-                <h2 class="text-6xl font-extrabold text-white mb-4 transform animate-bounce" style="font-family: 'BankGothic Md BT', sans-serif;">
+                <h2 class="text-6xl font-extrabold mb-4 transform animate-bounce uppercase custom-font">
                     The incredible innovations in
                 </h2>
-                <p class="text-2xl text-gray-200 mb-6 animate-slideInLeft">
-                    Interior Design Studio& Turnkey Project Solutions
+                
+                <p class="text-2xl animate-slideInLeft custom-font" style="margin-bottom: 2px; display: block;">
+                    Interior Design Studio
                 </p>
+                <p class="text-2xl animate-slideInLeft custom-font" style="margin-top: 2px; display: block;">
+                    Turnkey Project Solutions
+                </p>
+                
+                <br>
                 <br>
                 <a href="#services" class="bg-primary text-white px-8 py-4 rounded-full hover:bg-opacity-80 transition transform hover:scale-110 shadow-lg animate-pulse">
                     Explore Our Services
                 </a>
                 <div class="flex justify-center space-x-6 mt-8 animate-popUp">
-                    <a href="https://www.facebook.com/profile.php?id=100075690131842" target="_blank" class="text-white hover:text-accent transition transform hover:scale-125"><i class="fab fa-facebook-f text-3xl"><img src="./facebook.png" width="50px" height="50px" alt="facebook"></i></a>
-                    <a href="https://www.instagram.com/incrivel_design_studio/" target="_blank" class="text-white hover:text-accent transition transform hover:scale-125"><i class="fab fa-instagram text-3xl"><img src="./instagram.png" width="50px" height="50px" alt="instagram"></i></a>
-                    <a href="https://wa.me/919054871719?text=welcome" target="_blank" class="text-white hover:text-accent transition transform hover:scale-125"><i class="fab fa-pinterest-p text-3xl"><img src="./whatsap.png" width="50px" height="50px" alt="whatsap"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100075690131842" target="_blank" class="text-white hover:text-accent transition transform hover:scale-125">
+                        <img src="./facebook.png" width="50px" height="50px" alt="facebook">
+                    </a>
+                    <a href="https://www.instagram.com/incrivel_design_studio/" target="_blank" class="text-white hover:text-accent transition transform hover:scale-125">
+                        <img src="./instagram.png" width="50px" height="50px" alt="instagram">
+                    </a>
+                    <a href="https://wa.me/918200835327?text=welcome" target="_blank" class="text-white hover:text-accent transition transform hover:scale-125">
+                        <img src="./whatsap.png" width="50px" height="50px" alt="whatsapp">
+                    </a>
                 </div>
             </div>
         </section>
         
-
-        <section id="about" class="py-20 bg-gray-900 text-white relative">
-            <div class="container mx-auto px-6 md:px-12 lg:px-24">
-                <h2 class="text-4xl font-extrabold mb-10 text-center text-accent">About Us</h2>
-                <div class="space-y-6">
-                    <p class="text-lg leading-relaxed">Established in 2021, Incrivel Design Interiors is renowned for its team of exceptionally skilled interior designers in Rajkot. Our team is dedicated to creating lifestyle-driven and sophisticated living spaces that reflect your unique style and preferences.</p>
-                    <p class="text-lg leading-relaxed">We believe in uncompromised quality every step of the way. From uplifting and inspiring designs to outstanding finishing and detailing, we believe that for our customers, only the best is good enough.</p>
-                    <p class="text-lg leading-relaxed">Over the years, the firm has designed various prestigious institutional, commercial, public sector, residential, and hospitality projects, each holding its own distinctive identity.</p>
+        
+        
+        
+        
+        <section id="hero-section" class="flex items-center justify-center relative" style="background-color: #1F1F1F;">  <!-- Dark Background -->
+            <div class="parallax-bg"></div>
+            <div class="container mx-auto px-4 text-center z-10">
+                <div class="glass-card p-8 mx-auto max-w-3xl">
+                    <h1 class="text-6xl font-bold mb-6 floating" style="color: #D9C5B2;">  <!-- Light Beige -->
+                        Transform Your Space
+                        <span class="block text-[#A26D5C] mt-2">Into Elegance</span>  <!-- Warm Terracotta -->
+                    </h1>
+                    <p class="text-xl mb-8 slide-in-left" style="color: #C5B5A0;">  <!-- Soft Beige -->
+                        Where Innovation Meets Interior Excellence
+                    </p>
+                    <div class="flex flex-col md:flex-row gap-4 justify-center">
+                        <a href="#services" class="bg-[#A26D5C] text-white px-8 py-4 rounded-full hover:bg-opacity-90 transition transform hover:scale-105 font-semibold">  <!-- Warm Terracotta -->
+                            Explore Our Services
+                        </a>
+                        <a href="#contact" class="border-2 border-[#A26D5C] text-[#A26D5C] px-8 py-4 rounded-full hover:bg-[#A26D5C] hover:text-white transition transform hover:scale-105 font-semibold">
+                            Get In Touch
+                        </a>
+                    </div>
                 </div>
-                <div class="mt-10 text-center">
-                    <blockquote class="text-2xl font-semibold italic text-accent border-l-4 border-accent pl-6">
-                        "Interior design that delivers magic in every moment."
-                    </blockquote>
-                </div>
-                <div class="absolute inset-0 opacity-10 bg-no-repeat bg-center bg-cover" style="background-image: url('path_to_background_image.jpg');"></div>
             </div>
         </section>
+        
+        
+        
+        
+
         
 
         <section id="services" class="py-16 bg-gray-800">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold mb-8 text-center">Our Services</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-gray-700 p-6 rounded-lg shadow-lg transform hover:scale-105 transition animate-slideIn">
-                        <h3 class="text-xl font-semibold mb-4">Interior Designing (2D/3D)</h3>
-                        <p>Create stunning interior designs with our expert team.</p>
+                    <div class="bg-[rgb(201,191,178)] p-6 rounded-lg shadow-lg transform hover:scale-105 transition animate-slideIn">
+                        <h3 class="text-xl font-semibold mb-4 text-black">Interior Designing (2D/3D)</h3>
+                        <p class="text-black">Create stunning interior designs with our expert team.</p>
                     </div>
-                    <div class="bg-gray-700 p-6 rounded-lg shadow-lg transform hover:scale-105 transition animate-slideIn" style="animation-delay: 0.2s;">
-                        <h3 class="text-xl font-semibold mb-4">Exterior Designing (3D)</h3>
-                        <p>Enhance your property's curb appeal with our 3D exterior designs.</p>
+                    <div class="bg-[rgb(201,191,178)] p-6 rounded-lg shadow-lg transform hover:scale-105 transition animate-slideIn" style="animation-delay: 0.2s;">
+                        <h3 class="text-xl font-semibold mb-4 text-black">Exterior Designing (3D)</h3>
+                        <p class="text-black">Enhance your property's curb appeal with our 3D exterior designs.</p>
                     </div>
-                    <div class="bg-gray-700 p-6 rounded-lg shadow-lg transform hover:scale-105 transition animate-slideIn" style="animation-delay: 0.4s;">
-                        <h3 class="text-xl font-semibold mb-4">Turnkey Interior Projects</h3>
-                        <p>Complete interior solutions from concept to execution.</p>
+                    <div class="bg-[rgb(201,191,178)] p-6 rounded-lg shadow-lg transform hover:scale-105 transition animate-slideIn" style="animation-delay: 0.4s;">
+                        <h3 class="text-xl font-semibold mb-4 text-black">Turnkey Interior Projects</h3>
+                        <p class="text-black">Complete interior solutions from concept to execution.</p>
                     </div>
+                    
                 </div>
             </div>
         </section>
         <section id="projects" class="py-16 bg-primary">
             <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold mb-12 text-center text-accent">Our Stunning Projects</h2>
+                <h2 class="text-4xl font-bold mb-12 text-center text-white">Our Stunning Projects</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div class="bg-secondary rounded-lg overflow-hidden shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out">
                         <div class="project-slider">
@@ -311,8 +451,8 @@
                             <img src="./prasantbhai_img/IMG_8598.jpg" alt="Modern Living Room 5">
                         </div>
                         <div class="p-6 bg-gray-800 project-info">
-                            <h3 class="text-2xl font-semibold text-white mb-4">Turnkey project</h3>
-                            <p class="text-gray-400">A sleek and contemporary living room design with minimalist furniture and vibrant accents.</p>
+                            <h3 class="text-2xl font-semibold text-white mb-4">Turnkey Projects</h3>
+                            <p class="text-gray-400">Turnkey Projects offer a seamless solution where we manage every aspect of design and execution, delivering a complete and ready-to-use space tailored to your needs.</p>
                         </div>
                     </div>
                     <div class="bg-secondary rounded-lg overflow-hidden shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out">
@@ -324,8 +464,9 @@
                             <img src="./jatin aghera/IMG_1574.jpg" alt="Modern Living Room 5">
                         </div>
                         <div class="p-6 bg-gray-800 project-info">
-                            <h3 class="text-2xl font-semibold text-white mb-4">Modern Living Room</h3>
-                            <p class="text-gray-400">A sleek and contemporary living room design with minimalist furniture and vibrant accents.</p>
+                            <h3 class="text-2xl font-semibold text-white mb-4">Modern  Interior Designs</h3>
+                            <p class="text-gray-400">Modern Interior Designs blend clean lines, minimalism, and functional aesthetics to create spaces that reflect contemporary lifestyles while prioritizing comfort and style.</p>
+                            
                         </div>
                     </div>
                     <!-- Additional project cards can be added here -->
@@ -335,7 +476,7 @@
 
         <section id="services-detail" class="py-20 bg-gray-900 text-white relative">
             <div class="container mx-auto px-6 md:px-12 lg:px-24">
-                <h2 class="text-4xl font-extrabold mb-12 text-center text-accent">Our Services in Detail</h2>
+                <h2 class="text-4xl font-extrabold mb-12 text-center text-white">Our Services in Detail</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div class="bg-secondary p-6 rounded-lg shadow-lg">
                         <h3 class="text-2xl font-semibold mb-4">Turnkey Projects</h3>
@@ -363,6 +504,24 @@
             </div>
         </section>
         
+        
+        <section id="about" class="py-20 bg-gray-900 text-white relative">
+            <div class="container mx-auto px-6 md:px-12 lg:px-24">
+                <h2 class="text-4xl font-extrabold mb-10 text-center text-white">About Us</h2>
+                <div class="space-y-6">
+                    <p class="text-lg leading-relaxed">Established in 2021, Incrivel Design Studio is renowned for its team of exceptionally skilled interior designers in Rajkot. Our team is dedicated to creating lifestyle-driven and sophisticated living spaces that reflect your unique style and preferences.</p>
+                    <p class="text-lg leading-relaxed">We believe in uncompromised quality every step of the way. From uplifting and inspiring designs to outstanding finishing and detailing, we believe that for our customers, only the best is good enough.</p>
+                    <p class="text-lg leading-relaxed">Over the years, the firm has designed various prestigious institutional, commercial, public sector, residential, and hospitality projects, each holding its own distinctive identity.</p>
+                </div>
+                <div class="mt-10 text-center">
+                    <blockquote class="text-2xl font-semibold italic text-accent border-l-4 border-accent pl-6">
+                        "Interior design that delivers magic in every moment."
+                    </blockquote>
+                </div>
+                <div class="absolute inset-0 opacity-10 bg-no-repeat bg-center bg-cover" style="background-image: url('path_to_background_image.jpg');"></div>
+            </div>
+        </section>
+
 
         <section id="contact" class="py-16 bg-gray-800">
             <div class="container mx-auto px-4">
@@ -381,12 +540,13 @@
             </div>
         </section>    </main>
 
-        <footer class="bg-gray-800 py-8">
-            <div class="container mx-auto px-4 text-center">
+        <footer class="bg-gray-800 py-8 w-full">
+            <div class="text-center px-4">
                 <p>&copy; 2024 INCRIVEL DESIGN STUDIO. All rights reserved.</p>
                 <p class="mt-4">We Make Your Lifestyle as amazing as you are.</p>
             </div>
         </footer>
+        
     <script>
         function setupProjectSliders() {
             const sliders = document.querySelectorAll('.project-slider');
@@ -423,6 +583,24 @@
             const menu = document.getElementById('menu');
             menuToggle.addEventListener('click', () => {
                 menu.classList.toggle('show');
+            });
+        });
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+    const parallax = document.querySelector('.parallax-bg');
+    const scrolled = window.pageYOffset;
+    parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+});
+
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
 
