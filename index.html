@@ -336,6 +336,54 @@
     }
 }
 
+@keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes popUp {
+        0% { transform: scale(0.8); }
+        60% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    .animate-fadeInUp { animation: fadeInUp 1s ease forwards; }
+    .animate-slideInLeft { animation: slideInLeft 1s ease forwards; }
+    .animate-slideInRight { animation: slideInRight 1s ease forwards; }
+    .animate-popUp { animation: popUp 1s ease forwards; }
+    
+    /* Spider web styling for subtle overlay design */
+    .spider-web::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 150%;
+        height: 150%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 70%);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        opacity: 0.3;
+        animation: spin 30s linear infinite;
+    }
+
+    /* Custom font style for a luxurious, sleek look */
+    .custom-font {
+        font-family: 'Playfair Display', serif; /* You can replace this with any premium serif or elegant font */
+        font-style: italic;
+    }
+
 
         </style>
 </head>
@@ -391,47 +439,47 @@
     
 
     <main>
-        <section id="home" class="w-screen min-h-screen flex items-center justify-center relative overflow-hidden">
-            <!-- Dark overlay with opacity -->
-            <div class="absolute inset-0 bg-black bg-opacity-80"></div>
-            <!-- Background image overlay -->
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('landing_back.png'); opacity: 0.5;"></div>
-            <!-- Spider web animation overlay -->
-            <div class="spider-web absolute inset-0"></div>
-            
-            <!-- Main content -->
-            <div class="text-center z-10 relative animate-fadeInUp">
-                <br class="mobile-break">
-                <br class="mobile-break">
-                <h2 class="text-6xl font-extrabold mb-4 transform animate-bounce uppercase custom-font">
-                    The incredible innovations in
-                </h2>
-                
-                <p class="text-2xl animate-slideInLeft custom-font" style="margin-bottom: 2px; display: block;">
-                    Interior Design Studio
-                </p>
-                <p class="text-2xl animate-slideInLeft custom-font" style="margin-top: 2px; display: block;">
-                    Turnkey Project Solutions
-                </p>
-                
-                <br>
-                <br>
-                <a href="#services" class="bg-primary text-white px-8 py-4 rounded-full hover:bg-opacity-80 transition transform hover:scale-110 shadow-lg animate-pulse">
-                    Explore Our Services
-                </a>
-                <div class="flex justify-center space-x-6 mt-8 animate-popUp">
-                    <a href="https://www.facebook.com/profile.php?id=100075690131842" target="_blank" class="text-white hover:text-accent transition transform hover:scale-125">
-                        <img src="./facebook.png" width="50px" height="50px" alt="facebook">
-                    </a>
-                    <a href="https://www.instagram.com/incrivel_design_studio/" target="_blank" class="text-white hover:text-accent transition transform hover:scale-125">
-                        <img src="./instagram.png" width="50px" height="50px" alt="instagram">
-                    </a>
-                    <a href="https://wa.me/918200835327?text=welcome" target="_blank" class="text-white hover:text-accent transition transform hover:scale-125">
-                        <img src="./whatsap.png" width="50px" height="50px" alt="whatsapp">
-                    </a>
-                </div>
-            </div>
-        </section>
+<!-- Home Section -->
+<section id="home" class="relative w-screen min-h-screen flex items-center justify-center bg-black overflow-hidden">
+    <!-- Dark overlay with gradient for depth -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black via-[rgba(0,0,0,0.8)] to-[rgba(0,0,0,0.6)] z-10"></div>
+    <!-- Background image overlay -->
+    <div class="absolute inset-0 bg-cover bg-center opacity-70 z-0" style="background-image: url('landing_back.png');"></div>
+    <!-- Spider web animation overlay for subtle design element -->
+    <div class="spider-web absolute inset-0 z-5 pointer-events-none"></div>
+
+    
+    <!-- Main content with rich typography and refined layout -->
+    <div class="relative text-center text-white z-20 space-y-6 animate-fadeInUp">
+        <br><br>
+        <h2 class="text-6xl font-bold mb-4 tracking-wider transform uppercase transition duration-300 ease-in-out animate-bounce custom-font">
+            The Incredible Innovations in
+        </h2>
+
+        <div class="text-2xl space-y-1 custom-font font-semibold">
+            <p class="animate-slideInLeft" style="margin-bottom: 2px;">Interior Design Studio</p>
+            <p class="animate-slideInRight" style="margin-top: 2px;">Turnkey Project Solutions</p>
+        </div>
+        <br><br>
+        <!-- Button with elegant hover effect -->
+        <a href="#services" class="bg-primary text-white text-lg font-semibold px-8 py-4 rounded-full shadow-xl hover:bg-opacity-90 hover:scale-105 transition transform animate-pulse">
+            Explore Our Services
+        </a>
+
+        <!-- Social Icons with elegant hover effects -->
+        <div class="flex justify-center space-x-6 mt-8 animate-popUp">
+            <a href="https://www.facebook.com/profile.php?id=100075690131842" target="_blank" class="transform hover:scale-110 transition-all duration-200">
+                <img src="./facebook.png" class="w-12 h-12" alt="facebook">
+            </a>
+            <a href="https://www.instagram.com/incrivel_design_studio/" target="_blank" class="transform hover:scale-110 transition-all duration-200">
+                <img src="./instagram.png" class="w-12 h-12" alt="instagram">
+            </a>
+            <a href="https://wa.me/918200835327?text=welcome" target="_blank" class="transform hover:scale-110 transition-all duration-200">
+                <img src="./whatsap.png" class="w-12 h-12" alt="whatsapp">
+            </a>
+        </div>
+    </div>
+</section>
         
         
         
