@@ -313,36 +313,75 @@
     color: white; /* or any specific color you prefer */
 }
 
+/* Spider web animation */
+.spider-web {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 70%);
+    z-index: 1;
+    pointer-events: none;
+    animation: spin-web 30s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes spin-web {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 
         </style>
 </head>
 <body class="bg-gray-900 text-white mx-auto flex flex-col justify-between items-center">
-    <header class="bg-[rgba(201,191,178,0.9)] px-4 py-2 fixed w-[90%] rounded-lg z-20 shadow-lg mt-8 mx-auto">
-        <nav class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="id_logo_black.png" alt="Incrivel Design Studio Logo" class="h-20 mr-2">
-                <h1 class="text-2xl font-bold navbar-brand" style="color: black;">
-                    <p style="font-family: 'Tahoma'; font-size: 1.5em;">incrivel</p> 
-                    <!-- Adjust margin based on screen size -->
-                    <p style="font-family: 'Calibri', sans-serif; font-size: 0.75em; display: inline-block;"
-                       class="md:ml-[74px] ml-[30px]">DESIGN STUDIO</p>
-                </h1>
-            </div>
-            
-            <ul class="hidden md:flex md:space-x-8">
-                <li><a href="#home" class="nav-link text-black font-semibold px-4 py-2">Home</a></li>
-                <li><a href="#services" class="nav-link text-black font-semibold px-4 py-2">Services</a></li>
-                <li><a href="#projects" class="nav-link text-black font-semibold px-4 py-2">Projects</a></li>
-                <li><a href="#contact" class="nav-link text-black font-semibold px-4 py-2">Contact</a></li>
-            </ul>
-            <button class="md:hidden text-black">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-                </svg>
-            </button>
-        </nav>
+<!-- Header Section -->
+<header id="header" class="bg-[rgba(201,191,178,0.9)] px-6 py-4 fixed w-[90%] rounded-lg z-20 shadow-2xl mt-8 mx-auto transition-all duration-300 transform hover:shadow-xl">
+    <nav class="container mx-auto flex justify-between items-center">
+        <!-- Logo Section -->
+        <div class="flex items-center">
+            <img src="id_logo_black.png" alt="Incrivel Design Studio Logo" class="h-16 mr-2 transition-transform duration-300 transform hover:rotate-6">
+            <h1 class="text-3xl font-bold text-gray-800" style="color: black;">
+                <p style="font-family: 'Tahoma'; font-size: 1.6em;">incrivel</p> 
+                <p style="font-family: 'Calibri', sans-serif; font-size: 0.8em;" class="md:ml-[74px] ml-[10px] tracking-wider text-gray-600">
+                    DESIGN STUDIO
+                </p>
+            </h1>
+        </div>
         
-    </header>
+        <!-- Desktop Navigation Links -->
+        <ul class="hidden md:flex md:space-x-8 text-black font-semibold text-lg">
+            <li><a href="#home" class="nav-link px-4 py-2 transition hover:text-gray-700 hover:underline">Home</a></li>
+            <li><a href="#services" class="nav-link px-4 py-2 transition hover:text-gray-700 hover:underline">Services</a></li>
+            <li><a href="#projects" class="nav-link px-4 py-2 transition hover:text-gray-700 hover:underline">Projects</a></li>
+            <li><a href="#contact" class="nav-link px-4 py-2 transition hover:text-gray-700 hover:underline">Contact</a></li>
+        </ul>
+        
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-black transition duration-200 hover:text-gray-700" onclick="toggleMenu()">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden flex flex-col items-center bg-[rgba(201,191,178,0.9)] rounded-lg mt-4 p-4 shadow-lg transition-all duration-300 transform">
+        <a href="#home" class="block py-2 text-lg text-black hover:text-gray-700" onclick="closeMenu()">Home</a>
+        <a href="#services" class="block py-2 text-lg text-black hover:text-gray-700" onclick="closeMenu()">Services</a>
+        <a href="#projects" class="block py-2 text-lg text-black hover:text-gray-700" onclick="closeMenu()">Projects</a>
+        <a href="#contact" class="block py-2 text-lg text-black hover:text-gray-700" onclick="closeMenu()">Contact</a>
+    </div>
+</header>
+
+
+
+    
     
     
     
@@ -352,9 +391,15 @@
     
 
     <main>
-        <section id="home" class="w-screen min-h-screen flex items-center justify-center relative">
+        <section id="home" class="w-screen min-h-screen flex items-center justify-center relative overflow-hidden">
+            <!-- Dark overlay with opacity -->
             <div class="absolute inset-0 bg-black bg-opacity-80"></div>
+            <!-- Background image overlay -->
             <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('landing_back.png'); opacity: 0.5;"></div>
+            <!-- Spider web animation overlay -->
+            <div class="spider-web absolute inset-0"></div>
+            
+            <!-- Main content -->
             <div class="text-center z-10 relative animate-fadeInUp">
                 <br class="mobile-break">
                 <br class="mobile-break">
@@ -387,6 +432,7 @@
                 </div>
             </div>
         </section>
+        
         
         
         
@@ -607,7 +653,33 @@
             });
         });
 
+    function toggleMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('hidden');
+    }
+    
+
+    function toggleMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const header = document.getElementById('header');
         
+        // Toggle menu visibility and style changes on header
+        menu.classList.toggle('hidden');
+        header.classList.toggle('bg-[rgba(0,0,0,0.85)]'); // Darken the background color when open
+        header.classList.toggle('shadow-none'); // Remove shadow to keep it consistent
+        header.classList.toggle('scale-105'); // Slightly scale up when open
+    }
+    
+    function closeMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const header = document.getElementById('header');
+
+        // Hide menu and reset header styling
+        menu.classList.add('hidden');
+        header.classList.remove('bg-[rgba(0,0,0,0.85)]');
+        header.classList.remove('shadow-none');
+        header.classList.remove('scale-105');
+    }
     </script>
 </body>
 </html>
